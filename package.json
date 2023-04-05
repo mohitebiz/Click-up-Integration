@@ -1,0 +1,33 @@
+{
+  "name": "click-up-integration",
+  "version": "1.0.0",
+  "description": "create task using workflow",
+  "main": "./src/server.js",
+  "scripts": {
+    "start:dev": "export NODE_ENV=development && nodemon src/server.js"
+  },
+  "author": "Mohit Gangadiya",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.3.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "http-errors": "^2.0.0",
+    "module-alias": "^2.2.2",
+    "morgan": "^1.10.0",
+    "stripe": "^11.17.0",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^6.0.0",
+    "nodemon": "^2.0.20"
+  },
+  "_moduleAliases": {
+    "@config": "src/config",
+    "@routes": "src/routes",
+    "@middlewares": "src/middlewares",
+    "@modules": "src/modules"
+  }
+}

@@ -1,0 +1,12 @@
+# Dependency directories
+node_modules/
+
+# environment variables file
+.env.*
+!.env.example
+
+# pm2 ecosystem file
+ecosystem.config.js
+
+# Logs
+src/logs

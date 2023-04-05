@@ -1,0 +1,286 @@
+{
+  "actionUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/createTask",
+  "published": true,
+  "inputFields": [
+    {
+      "typeDefinition": {
+        "name": "workSpaceInput",
+        "type": "enumeration",
+        "fieldType": "select",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/workSpace"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "spaceInputs",
+        "type": "enumeration",
+        "fieldType": "select",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/space"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "folderInputs",
+        "type": "enumeration",
+        "fieldType": "select",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/folder"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "listInputs",
+        "type": "enumeration",
+        "fieldType": "select",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/list"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "taskName",
+        "type": "string",
+        "fieldType": "text"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "taskDescription",
+        "type": "string",
+        "fieldType": "textarea"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "users",
+        "type": "enumeration",
+        "fieldType": "checkbox",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/users"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "status",
+        "type": "enumeration",
+        "fieldType": "select",
+        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/space/status"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "priority",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "value": 4,
+            "label": "Low"
+          },
+          {
+            "value": 3,
+            "label": "Normal"
+          },
+          {
+            "value": 2,
+            "label": "High"
+          },
+          {
+            "value": 1,
+            "label": "Urgent"
+          }
+        ]
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": false
+    },
+    {
+      "typeDefinition": {
+        "name": "startDate",
+        "type": "date",
+        "fieldType": "date"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "dueDate",
+        "type": "date",
+        "fieldType": "date"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    },
+    {
+      "typeDefinition": {
+        "name": "estimateTime",
+        "type": "number",
+        "fieldType": "number"
+      },
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
+      "isRequired": true
+    }
+  ],
+  "inputFieldDependencies": [
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "workSpaceInput",
+      "dependentFieldNames": [
+        "spaceInputs"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "spaceInputs",
+      "dependentFieldNames": [
+        "folderInputs"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "folderInputs",
+      "dependentFieldNames": [
+        "listInputs"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "listInputs",
+      "dependentFieldNames": [
+        "users"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "taskName",
+      "dependentFieldNames": [
+        "startDate"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "taskName",
+      "dependentFieldNames": [
+        "dueDate"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "taskName",
+      "dependentFieldNames": [
+        "estimateTime"
+      ]
+    },
+    {
+      "dependencyType": "SINGLE_FIELD",
+      "controllingFieldName": "spaceInputs",
+      "dependentFieldNames": [
+        "status"
+      ]
+    }
+  ],
+  "labels": {
+    "en": {
+      "actionName": "Create Task In ClickUp",
+      "actionDescription": "This action will create a new task in click up!",
+      "inputFieldLabels": {
+        "workSpaceInput": "Select Work-Space",
+        "spaceInputs": "Select Space",
+        "folderInputs": "Select Folder",
+        "taskName": "Enter Task Name",
+        "taskDescription": "Enter Description For Task",
+        "startDate": "Enter Start Date",
+        "dueDate": "Enter Due Date",
+        "estimateTime": "Enter Estime Time For Task (In Hours)",
+        "listInputs": "Select List ",
+        "users": "Select Assignees",
+        "status": "Select Status",
+        "priority": "Select Priority"
+      },
+      "inputFieldDescriptions": {
+        "workSpaceInput": "Please select the workspace to create task",
+        "spaceInputs": "Please select the space to create task",
+        "folderInputs": "Please select the folder to create task",
+        "taskName": "Please enter the name for task",
+        "taskDescription": "Please enter description for task",
+        "startDate": "Please enter start date",
+        "dueDate": "Please enter due date",
+        "estimateTime": "Please enter estimate time for task (in hours)",
+        "listInputs": "Please select list",
+        "users": "Please select users",
+        "status": "Please select status",
+        "priority": "Please select priority"
+      }
+    }
+  },
+  "objectTypes": [
+    "CONTACT",
+    "COMPANY",
+    "DEAL"
+  ],
+  "functions": [
+    {
+      "functionType": "PRE_FETCH_OPTIONS",
+      "id": "spaceInputs",
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?workSpaceId=' + request.fields.workSpaceInput.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+    },
+    {
+      "functionType": "PRE_FETCH_OPTIONS",
+      "id": "folderInputs",
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+    },
+    {
+      "functionType": "PRE_FETCH_OPTIONS",
+      "id": "listInputs",
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?folderId=' + request.fields.folderInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+    },
+    {
+      "functionType": "PRE_FETCH_OPTIONS",
+      "id": "users",
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?listId=' + request.fields.listInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+    },
+    {
+      "functionType": "PRE_FETCH_OPTIONS",
+      "id": "status",
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+    }
+  ]
+}
