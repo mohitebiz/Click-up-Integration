@@ -10,3 +10,6 @@ ecosystem.config.js
 
 # Logs
 src/logs
+
+# cred
+token.json
