@@ -2,12 +2,16 @@ const oauth2Client = require("../../config/google.config");
 const { google } = require("googleapis");
 const { axiosHubspot } = require("../../config/axios.config");
 const generalResponse = require("../../middlewares/general-response.middleware");
-const { ORIGINAL_FILE_ID } = require("../../config/env.config");
+const {
+  ORIGINAL_FILE_ID,
+  PARENT_FOLDER_ID,
+} = require("../../config/env.config");
 const { logger } = require("../../config/logger.config");
 
 const createSlide = async (req, response) => {
   const webhookData = req.body;
   try {
+    const dealId = webhookData.objectId;
     const slidesAPI = google.slides({
       version: "v1",
       auth: oauth2Client,
@@ -18,9 +22,9 @@ const createSlide = async (req, response) => {
     });
     const createFolderAndGetId = async (diplayName) => {
       const fileMetadata = {
-        name: diplayName || "crmtoolbox",
+        name: diplayName || dealId,
         mimeType: "application/vnd.google-apps.folder",
-        parents: ["1Rf0ki43qoQukyRScYBfTccmUNqm1ZdAf"],
+        parents: [PARENT_FOLDER_ID],
       };
 
       const file = await drive.files.create({
@@ -31,12 +35,6 @@ const createSlide = async (req, response) => {
       logger.verbose(`Folder ID: ${file.data.id}`);
       return file.data.id;
     };
-
-    const { data } = await drive.files.get({
-      fileId: ORIGINAL_FILE_ID,
-      fields: "*",
-    });
-    const dealId = webhookData.objectId;
 
     const searchObject = {
       filterGroups: [
@@ -56,13 +54,13 @@ const createSlide = async (req, response) => {
       searchObject
     );
 
-    const companyName = retailCompanyResponse.data.results[0].properties.name;
+    const companyName =
+      retailCompanyResponse?.data?.results[0]?.properties?.name;
     logger.verbose(`companyName is: ${companyName}`);
     const parentFolderId = await createFolderAndGetId(companyName);
 
-    const fileId = data.id;
     const fileMetadata = {
-      name: data.name,
+      name: "Company HubSpot Onboarding",
       parents: [parentFolderId],
       mimeType: "application/vnd.google-apps.presentation",
       fields: "*",
@@ -70,26 +68,26 @@ const createSlide = async (req, response) => {
 
     // Duplicate the file
     const { data: duplicate } = await drive.files.copy({
-      fileId,
+      fileId: ORIGINAL_FILE_ID,
       requestBody: fileMetadata,
     });
 
     if (duplicate.id) {
-      const presentationId = duplicate.id;
+      const presentationId = duplicate?.id;
 
-      const plans = webhookData.properties.hubspot_plan.value.replace(
+      const plans = webhookData?.properties?.hubspot_plan?.value.replace(
         /;/g,
         ", "
       );
-      const goals = webhookData.properties.pso_initial_goals.value.replace(
+      const goals = webhookData?.properties?.pso_initial_goals?.value.replace(
         /;/g,
         ", "
       );
       const description =
-        webhookData.properties.customer_onboarding_specialist___description
-          .value;
+        webhookData?.properties?.customer_onboarding_specialist___description
+          ?.value;
       const imageUrl =
-        webhookData.properties.customer_onboarding_specialist___imgurl.value;
+        webhookData?.properties?.customer_onboarding_specialist___imgurl?.value;
 
       const payload = [
         {
@@ -123,13 +121,21 @@ const createSlide = async (req, response) => {
         };
       });
 
-      requests.push({
-        replaceImage: {
-          imageObjectId: "p3_i432",
-          imageReplaceMethod: "CENTER_INSIDE",
-          url: imageUrl,
-        },
-      });
+      imageUrl
+        ? requests.push({
+            replaceImage: {
+              imageObjectId: "p3_i432",
+              imageReplaceMethod: "CENTER_INSIDE",
+              url: imageUrl,
+            },
+          })
+        : requests.push({
+            replaceImage: {
+              imageObjectId: "p3_i432",
+              imageReplaceMethod: "CENTER_INSIDE",
+              url: "https://www.crmtoolbox.io/hs-fs/hubfs/crm-toolbox/img/logo-crm-toolbox-avidly.png?width=1000&height=272&name=logo-crm-toolbox-avidly.png",
+            },
+          });
 
       const updatedSlide = await slidesAPI.presentations.batchUpdate({
         presentationId,
@@ -137,15 +143,28 @@ const createSlide = async (req, response) => {
           requests,
         },
       });
+
+      const { data } = await drive.files.get({
+        fileId: presentationId,
+        fields: "*",
+      });
+      const responseData = {
+        fileId: data.id,
+        url: data?.webViewLink,
+        downloadUrl: data?.webContentLink,
+      };
+
       logger.verbose(
         `new presentation id is ${updatedSlide?.data?.presentationId}`
       );
       return generalResponse({
         response,
-        message: `new presentation id is ${updatedSlide?.data?.presentationId}`,
+        message: `new presentation id is ${data}`,
         toast: false,
         statusCode: 200,
         responseType: "success",
+        data: responseData,
+        dataKey: "data",
       });
     } else {
       logger.verbose(
@@ -153,7 +172,7 @@ const createSlide = async (req, response) => {
       );
     }
   } catch (error) {
-    logger.warn(JSON.stringify(error));
+    logger.warn(JSON.stringify(error.message));
     return false;
   }
 };

@@ -5,9 +5,10 @@ const generalResponse = ({
   statusCode = 200,
   responseType = "success",
   data = undefined,
+  dataKey = "options",
 }) => {
   response.status(statusCode).send({
-    options: data,
+    [dataKey]: data,
     message: message,
     toast: toast,
     responseType: responseType,

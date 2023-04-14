@@ -17,9 +17,7 @@ const oauth2Client = new google.auth.OAuth2(
 
 const setToken = async () => {
   try {
-    // const record = await Auth.findOne({ accountType: "google" });
     const extist = fs.existsSync("./token.json");
-    console.log(extist);
     if (extist) {
       const record = await fs.readFileSync("./token.json", "utf-8");
 
@@ -40,7 +38,14 @@ const setToken = async () => {
 setToken();
 
 oauth2Client.on("tokens", async (tokens) => {
-  fs.writeFileSync("token.json", JSON.stringify(tokens));
+  const oldRecord = await fs.readFileSync("./token.json", "utf-8");
+  const jsonData = JSON.parse(oldRecord);
+
+  logger.verbose(`main ${JSON.stringify(tokens)}`);
+
+  const tokensdata = { ...tokens, refresh_token: jsonData.refresh_token };
+
+  fs.writeFileSync("token.json", JSON.stringify(tokensdata));
   console.log("File written successfully");
 });
 

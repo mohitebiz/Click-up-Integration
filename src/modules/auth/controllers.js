@@ -35,17 +35,7 @@ const handleAuthCallback = async (req, res) => {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
-    console.log("tokens", tokens);
-
-    // const record = await Auth.findOneAndUpdate(
-    //   { accountType: "google" },
-    //   {
-    //     accessToken: tokens.access_token,
-    //     refreshToken: tokens.refresh_token,
-    //     accessTokenExpiresAt: tokens.expiry_date,
-    //   },
-    //   { new: true, upsert: true }
-    // );
+    logger.verbose(`handle callBack ${JSON.stringify(tokens)}`);
     fs.writeFileSync("token.json", JSON.stringify(tokens));
     console.log("File written successfully");
     res.send({ message: "Success" });
