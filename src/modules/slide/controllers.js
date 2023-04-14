@@ -5,6 +5,7 @@ const generalResponse = require("../../middlewares/general-response.middleware")
 const {
   ORIGINAL_FILE_ID,
   PARENT_FOLDER_ID,
+  DRIVE_ID,
 } = require("../../config/env.config");
 const { logger } = require("../../config/logger.config");
 
@@ -31,6 +32,8 @@ const createSlide = async (req, response) => {
         // auth: auth,
         resource: fileMetadata,
         fields: "id",
+        supportsAllDrives: true,
+        driveId: DRIVE_ID,
       });
       logger.verbose(`Folder ID: ${file.data.id}`);
       return file.data.id;
@@ -70,6 +73,8 @@ const createSlide = async (req, response) => {
     const { data: duplicate } = await drive.files.copy({
       fileId: ORIGINAL_FILE_ID,
       requestBody: fileMetadata,
+      supportsAllDrives: true,
+      driveId: DRIVE_ID,
     });
 
     if (duplicate.id) {
@@ -147,6 +152,8 @@ const createSlide = async (req, response) => {
       const { data } = await drive.files.get({
         fileId: presentationId,
         fields: "*",
+        supportsAllDrives: true,
+        driveId:DRIVE_ID,
       });
       const responseData = {
         fileId: data.id,
@@ -157,6 +164,7 @@ const createSlide = async (req, response) => {
       logger.verbose(
         `new presentation id is ${updatedSlide?.data?.presentationId}`
       );
+      console.log({responseData});
       return generalResponse({
         response,
         message: `new presentation id is ${data}`,
