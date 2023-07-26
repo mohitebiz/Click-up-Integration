@@ -14,6 +14,7 @@ const {
 const workSpaceData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
+    console.log("workspace", portalId);
     const allWorkSpaceData = await getworkSpaceData(portalId);
     if (allWorkSpaceData) {
       logger.verbose("workspaces Fetched successfully");
@@ -39,6 +40,7 @@ const workSpaceData = async (request, response, next) => {
 const spacesData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
+    console.log("space",portalId);
     const workSpaceId = request.query.workSpaceId;
     const allspaceData = await getspaceData(workSpaceId, portalId);
     if (allspaceData) {
@@ -66,6 +68,7 @@ const statusData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("status", portalId);
     const spaceId = request.query.spaceId;
     const allStatusData = await getStatusData(spaceId, portalId);
     if (allStatusData) {
@@ -93,6 +96,7 @@ const folderData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("folder", portalId);
     const spaceId = request.query.spaceId;
     const allFolderData = await getFolderData(spaceId, portalId);
     if (allFolderData) {
@@ -120,6 +124,7 @@ const listData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("list", portalId);
     const folderId = request.query.folderId;
     const allListData = await getListData(folderId, portalId);
     if (allListData) {
@@ -147,6 +152,7 @@ const userData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("user", portalId);
     const listId = request.query.listId;
     const allUsers = await getUserData(listId, portalId);
     if (allUsers) {
@@ -175,6 +181,7 @@ const taskData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("task", portalId);
     logger.verbose(JSON.stringify(request.body));
     const fetchedData = request.body.fields;
     const createdTask = await createTask(fetchedData, portalId);

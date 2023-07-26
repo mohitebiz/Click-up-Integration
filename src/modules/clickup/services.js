@@ -2,6 +2,7 @@ const { axiosClickUp } = require("../../config/axios.config");
 const { logger } = require("../../config/logger.config");
 const getworkSpaceData = async (portalId) => {
   try {
+    console.log("portalId", portalId);
     const resworkspaces = await axiosClickUp.get("/api/v2/team", {
       portalId: portalId,
     });
@@ -25,6 +26,7 @@ const getworkSpaceData = async (portalId) => {
 
 const getspaceData = async (workSpaceId, portalId) => {
   try {
+    console.log("portalId", portalId);
     const resspaces = await axiosClickUp.get(
       `/api/v2/team/${workSpaceId}/space`,
       {
@@ -49,6 +51,7 @@ const getspaceData = async (workSpaceId, portalId) => {
 
 const getStatusData = async (spaceId, portalId) => {
   try {
+    console.log('portalId', portalId)
     const resspace = await axiosClickUp.get(`/api/v2/space/${spaceId}`, {
       portalId: portalId,
     });
@@ -70,6 +73,7 @@ const getStatusData = async (spaceId, portalId) => {
 
 const getFolderData = async (spaceId, portalId) => {
   try {
+    console.log('portalId', portalId)
     const resfolders = await axiosClickUp.get(
       `/api/v2/space/${spaceId}/folder`,
       {
@@ -93,6 +97,7 @@ const getFolderData = async (spaceId, portalId) => {
 };
 const getListData = async (folderId) => {
   try {
+    console.log('portalId', portalId)
     const resListData = await axiosClickUp.get(
       `/api/v2/folder/${folderId}/list`,
       {
@@ -117,6 +122,7 @@ const getListData = async (folderId) => {
 
 const getUserData = async (listId) => {
   try {
+    console.log('portalId', portalId)
     const resUserData = await axiosClickUp.get(
       `/api/v2/list/${listId}/member`,
       {
@@ -142,6 +148,7 @@ const getUserData = async (listId) => {
 
 const createTask = async (fetchedData, portalId) => {
   try {
+    console.log('portalId', portalId)
     payload = {
       name: fetchedData?.taskName,
       description: fetchedData?.taskDescription,

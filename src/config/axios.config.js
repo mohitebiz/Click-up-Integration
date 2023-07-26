@@ -14,12 +14,14 @@ const axiosClickUp = axios.create({
 });
 axiosClickUp.interceptors.request.use(
   async (request) => {
+    
     logger.verbose(
       `* * * requesting clickup for - portal ${request.portalId}  * * *`
     );
     const clickupToken = tokenJson[request.portalId].clickupToken;
+    console.log('clickupToken', clickupToken)
 
-    request.headers["Authorization"] = `Bearer ${clickupToken}`;
+    request.headers["Authorization"] = clickupToken;
 
     return request;
   },
