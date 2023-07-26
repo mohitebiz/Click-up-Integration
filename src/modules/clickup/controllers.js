@@ -13,7 +13,8 @@ const {
 
 const workSpaceData = async (request, response, next) => {
   try {
-    const allWorkSpaceData = await getworkSpaceData();
+    const { portalId } = request.body;
+    const allWorkSpaceData = await getworkSpaceData(portalId);
     if (allWorkSpaceData) {
       logger.verbose("workspaces Fetched successfully");
       return generalResponse({
@@ -37,8 +38,9 @@ const workSpaceData = async (request, response, next) => {
 };
 const spacesData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
     const workSpaceId = request.query.workSpaceId;
-    const allspaceData = await getspaceData(workSpaceId);
+    const allspaceData = await getspaceData(workSpaceId, portalId);
     if (allspaceData) {
       logger.verbose("spaces Fetched successfully");
       return generalResponse({
@@ -62,8 +64,10 @@ const spacesData = async (request, response, next) => {
 };
 const statusData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
+
     const spaceId = request.query.spaceId;
-    const allStatusData = await getStatusData(spaceId);
+    const allStatusData = await getStatusData(spaceId, portalId);
     if (allStatusData) {
       logger.verbose("status Fetched successfully");
       return generalResponse({
@@ -87,8 +91,10 @@ const statusData = async (request, response, next) => {
 };
 const folderData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
+
     const spaceId = request.query.spaceId;
-    const allFolderData = await getFolderData(spaceId);
+    const allFolderData = await getFolderData(spaceId, portalId);
     if (allFolderData) {
       logger.verbose("folders Fetched successfully");
       return generalResponse({
@@ -112,8 +118,10 @@ const folderData = async (request, response, next) => {
 };
 const listData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
+
     const folderId = request.query.folderId;
-    const allListData = await getListData(folderId);
+    const allListData = await getListData(folderId, portalId);
     if (allListData) {
       logger.verbose("lists Fetched successfully");
       return generalResponse({
@@ -137,8 +145,10 @@ const listData = async (request, response, next) => {
 };
 const userData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
+
     const listId = request.query.listId;
-    const allUsers = await getUserData(listId);
+    const allUsers = await getUserData(listId, portalId);
     if (allUsers) {
       logger.verbose("Users Fetched successfully");
       return generalResponse({
@@ -163,9 +173,11 @@ const userData = async (request, response, next) => {
 
 const taskData = async (request, response, next) => {
   try {
+    const { portalId } = request.body;
+
     logger.verbose(JSON.stringify(request.body));
     const fetchedData = request.body.fields;
-    const createdTask = await createTask(fetchedData);
+    const createdTask = await createTask(fetchedData, portalId);
     if (createdTask) {
       logger.verbose(`Task created successfully at id ${createdTask.id}`);
       return generalResponse({

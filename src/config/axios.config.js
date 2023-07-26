@@ -5,12 +5,29 @@ const {
   HUBSPOT_API_URL,
   HUBSPOT_PRIVATE_APP_TOKEN,
 } = require("../config/env.config");
-
+const { logger } = require("./logger.config");
+const { tokenJson } = require("../constant/clickupToken.constant");
 const axiosClickUp = axios.create({
   baseURL: CLICKUP_API_URL,
   timeout: 3600 * 1000,
-  headers: { Authorization: CLICKUP_API_TOKEN },
+  // headers: { Authorization: CLICKUP_API_TOKEN },
 });
+axiosClickUp.interceptors.request.use(
+  async (request) => {
+    logger.verbose(
+      `* * * requesting clickup for - portal ${request.portalId}  * * *`
+    );
+    const clickupToken = tokenJson[request.portalId].clickupToken;
+
+    request.headers["Authorization"] = `Bearer ${clickupToken}`;
+
+    return request;
+  },
+  (error) => {
+    console.log("errorININterceptor>>>", error);
+    return Promise.reject(error);
+  }
+);
 
 const axiosHubspot = axios.create({
   baseURL: HUBSPOT_API_URL,

@@ -10,6 +10,7 @@ ecosystem.config.js
 
 # Logs
 src/logs
+src/constant/clickupToken.constant.js
 
 # cred
 token.json

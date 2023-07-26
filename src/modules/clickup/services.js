@@ -1,8 +1,10 @@
 const { axiosClickUp } = require("../../config/axios.config");
 const { logger } = require("../../config/logger.config");
-const getworkSpaceData = async () => {
+const getworkSpaceData = async (portalId) => {
   try {
-    const resworkspaces = await axiosClickUp.get("/api/v2/team");
+    const resworkspaces = await axiosClickUp.get("/api/v2/team", {
+      portalId: portalId,
+    });
 
     const workSpaceData = resworkspaces.data.teams;
     // const responseArray = [];
@@ -21,10 +23,13 @@ const getworkSpaceData = async () => {
   }
 };
 
-const getspaceData = async (workSpaceId) => {
+const getspaceData = async (workSpaceId, portalId) => {
   try {
     const resspaces = await axiosClickUp.get(
-      `/api/v2/team/${workSpaceId}/space`
+      `/api/v2/team/${workSpaceId}/space`,
+      {
+        portalId: portalId,
+      }
     );
     const spaceData = resspaces.data.spaces;
     const responseArray = [];
@@ -42,9 +47,11 @@ const getspaceData = async (workSpaceId) => {
   }
 };
 
-const getStatusData = async (spaceId) => {
+const getStatusData = async (spaceId, portalId) => {
   try {
-    const resspace = await axiosClickUp.get(`/api/v2/space/${spaceId}`);
+    const resspace = await axiosClickUp.get(`/api/v2/space/${spaceId}`, {
+      portalId: portalId,
+    });
     const statusData = resspace.data?.statuses;
     const responseArray = [];
     for (obj of statusData) {
@@ -61,10 +68,13 @@ const getStatusData = async (spaceId) => {
   }
 };
 
-const getFolderData = async (spaceId) => {
+const getFolderData = async (spaceId, portalId) => {
   try {
     const resfolders = await axiosClickUp.get(
-      `/api/v2/space/${spaceId}/folder`
+      `/api/v2/space/${spaceId}/folder`,
+      {
+        portalId: portalId,
+      }
     );
     const folderData = resfolders.data.folders;
     const responseArray = [];
@@ -84,7 +94,10 @@ const getFolderData = async (spaceId) => {
 const getListData = async (folderId) => {
   try {
     const resListData = await axiosClickUp.get(
-      `/api/v2/folder/${folderId}/list`
+      `/api/v2/folder/${folderId}/list`,
+      {
+        portalId: portalId,
+      }
     );
     const listData = resListData.data.lists;
     const responseArray = [];
@@ -104,7 +117,12 @@ const getListData = async (folderId) => {
 
 const getUserData = async (listId) => {
   try {
-    const resUserData = await axiosClickUp.get(`/api/v2/list/${listId}/member`);
+    const resUserData = await axiosClickUp.get(
+      `/api/v2/list/${listId}/member`,
+      {
+        portalId: portalId,
+      }
+    );
     const listData = resUserData.data.members;
     const responseArray = [];
     for (obj of listData) {
@@ -122,7 +140,7 @@ const getUserData = async (listId) => {
   }
 };
 
-const createTask = async (fetchedData) => {
+const createTask = async (fetchedData, portalId) => {
   try {
     payload = {
       name: fetchedData?.taskName,
@@ -136,6 +154,9 @@ const createTask = async (fetchedData) => {
     };
     const resListData = await axiosClickUp.post(
       `/api/v2/list/${fetchedData?.listInputs}/task`,
+      {
+        portalId: portalId,
+      },
       payload
     );
     return resListData.data;
