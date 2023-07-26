@@ -51,7 +51,7 @@ const getspaceData = async (workSpaceId, portalId) => {
 
 const getStatusData = async (spaceId, portalId) => {
   try {
-    console.log('portalId', portalId)
+    console.log("portalId", portalId);
     const resspace = await axiosClickUp.get(`/api/v2/space/${spaceId}`, {
       portalId: portalId,
     });
@@ -73,7 +73,7 @@ const getStatusData = async (spaceId, portalId) => {
 
 const getFolderData = async (spaceId, portalId) => {
   try {
-    console.log('portalId', portalId)
+    console.log("portalId", portalId);
     const resfolders = await axiosClickUp.get(
       `/api/v2/space/${spaceId}/folder`,
       {
@@ -95,9 +95,9 @@ const getFolderData = async (spaceId, portalId) => {
     return false;
   }
 };
-const getListData = async (folderId) => {
+const getListData = async (folderId, portalId) => {
   try {
-    console.log('portalId', portalId)
+    console.log("portalId", portalId);
     const resListData = await axiosClickUp.get(
       `/api/v2/folder/${folderId}/list`,
       {
@@ -115,14 +115,15 @@ const getListData = async (folderId) => {
 
     return responseArray;
   } catch (error) {
+    console.log(error);
     logger.warn(JSON.stringify(error));
     return false;
   }
 };
 
-const getUserData = async (listId) => {
+const getUserData = async (listId, portalId) => {
   try {
-    console.log('portalId', portalId)
+    console.log("portalId", portalId);
     const resUserData = await axiosClickUp.get(
       `/api/v2/list/${listId}/member`,
       {
@@ -148,7 +149,7 @@ const getUserData = async (listId) => {
 
 const createTask = async (fetchedData, portalId) => {
   try {
-    console.log('portalId', portalId)
+    console.log("portalId", portalId);
     payload = {
       name: fetchedData?.taskName,
       description: fetchedData?.taskDescription,
@@ -161,10 +162,10 @@ const createTask = async (fetchedData, portalId) => {
     };
     const resListData = await axiosClickUp.post(
       `/api/v2/list/${fetchedData?.listInputs}/task`,
+      payload,
       {
         portalId: portalId,
-      },
-      payload
+      }
     );
     return resListData.data;
   } catch (error) {

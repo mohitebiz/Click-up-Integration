@@ -39,8 +39,9 @@ const workSpaceData = async (request, response, next) => {
 };
 const spacesData = async (request, response, next) => {
   try {
+    console.log("request.body", request.body);
     const { portalId } = request.body;
-    console.log("space",portalId);
+    console.log("space", portalId);
     const workSpaceId = request.query.workSpaceId;
     const allspaceData = await getspaceData(workSpaceId, portalId);
     if (allspaceData) {
@@ -124,6 +125,7 @@ const listData = async (request, response, next) => {
   try {
     const { portalId } = request.body;
 
+    console.log("request.body", request.body);
     console.log("list", portalId);
     const folderId = request.query.folderId;
     const allListData = await getListData(folderId, portalId);
@@ -179,11 +181,14 @@ const userData = async (request, response, next) => {
 
 const taskData = async (request, response, next) => {
   try {
-    const { portalId } = request.body;
+    const { origin } = request.body;
+    const { portalId } = origin;
 
+    console.log("request.body", request.body);
     console.log("task", portalId);
     logger.verbose(JSON.stringify(request.body));
     const fetchedData = request.body.fields;
+    console.log("fetchedData", fetchedData);
     const createdTask = await createTask(fetchedData, portalId);
     if (createdTask) {
       logger.verbose(`Task created successfully at id ${createdTask.id}`);

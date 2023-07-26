@@ -1,5 +1,5 @@
 {
-  "actionUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/createTask",
+  "actionUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/createTask",
   "published": true,
   "inputFields": [
     {
@@ -7,11 +7,9 @@
         "name": "workSpaceInput",
         "type": "enumeration",
         "fieldType": "select",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/workSpace"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/workSpace"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -19,11 +17,9 @@
         "name": "spaceInputs",
         "type": "enumeration",
         "fieldType": "select",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/space"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/space"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -31,11 +27,9 @@
         "name": "folderInputs",
         "type": "enumeration",
         "fieldType": "select",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/folder"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/folder"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -43,11 +37,9 @@
         "name": "listInputs",
         "type": "enumeration",
         "fieldType": "select",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/list"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/list"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -56,9 +48,7 @@
         "type": "string",
         "fieldType": "text"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -67,9 +57,7 @@
         "type": "string",
         "fieldType": "textarea"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -77,11 +65,9 @@
         "name": "users",
         "type": "enumeration",
         "fieldType": "checkbox",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/users"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/users"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -89,11 +75,9 @@
         "name": "status",
         "type": "enumeration",
         "fieldType": "select",
-        "optionsUrl": "https://77d2-103-215-158-90.ngrok.io/clickup/space/status"
+        "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/space/status"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -120,9 +104,7 @@
           }
         ]
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": false
     },
     {
@@ -131,9 +113,7 @@
         "type": "date",
         "fieldType": "date"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -142,9 +122,7 @@
         "type": "date",
         "fieldType": "date"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     },
     {
@@ -153,9 +131,7 @@
         "type": "number",
         "fieldType": "number"
       },
-      "supportedValueTypes": [
-        "STATIC_VALUE"
-      ],
+      "supportedValueTypes": ["STATIC_VALUE"],
       "isRequired": true
     }
   ],
@@ -163,63 +139,47 @@
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "workSpaceInput",
-      "dependentFieldNames": [
-        "spaceInputs"
-      ]
+      "dependentFieldNames": ["spaceInputs"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "spaceInputs",
-      "dependentFieldNames": [
-        "folderInputs"
-      ]
+      "dependentFieldNames": ["folderInputs"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "folderInputs",
-      "dependentFieldNames": [
-        "listInputs"
-      ]
+      "dependentFieldNames": ["listInputs"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "listInputs",
-      "dependentFieldNames": [
-        "users"
-      ]
+      "dependentFieldNames": ["users"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": [
-        "startDate"
-      ]
+      "dependentFieldNames": ["startDate"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": [
-        "dueDate"
-      ]
+      "dependentFieldNames": ["dueDate"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": [
-        "estimateTime"
-      ]
+      "dependentFieldNames": ["estimateTime"]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "spaceInputs",
-      "dependentFieldNames": [
-        "status"
-      ]
+      "dependentFieldNames": ["status"]
     }
   ],
   "labels": {
     "en": {
-      "actionName": "Create Task In ClickUp",
+      "actionName": "Create Task - ClickUp",
       "actionDescription": "This action will create a new task in click up!",
       "inputFieldLabels": {
         "workSpaceInput": "Select Work-Space",
@@ -251,36 +211,32 @@
       }
     }
   },
-  "objectTypes": [
-    "CONTACT",
-    "COMPANY",
-    "DEAL"
-  ],
+  "objectTypes": ["CONTACT", "COMPANY", "DEAL"],
   "functions": [
     {
       "functionType": "PRE_FETCH_OPTIONS",
       "id": "spaceInputs",
-      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?workSpaceId=' + request.fields.workSpaceInput.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?workSpaceId=' + request.fields.workSpaceInput.fieldValue.value, body: JSON.stringify(request), httpMethod: 'POST' }; }"
     },
     {
       "functionType": "PRE_FETCH_OPTIONS",
       "id": "folderInputs",
-      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request), httpMethod: 'POST' }; }"
     },
     {
       "functionType": "PRE_FETCH_OPTIONS",
       "id": "listInputs",
-      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?folderId=' + request.fields.folderInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?folderId=' + request.fields.folderInputs.fieldValue.value, body: JSON.stringify(request), httpMethod: 'POST' }; }"
     },
     {
       "functionType": "PRE_FETCH_OPTIONS",
       "id": "users",
-      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?listId=' + request.fields.listInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?listId=' + request.fields.listInputs.fieldValue.value, body: JSON.stringify(request), httpMethod: 'POST' }; }"
     },
     {
       "functionType": "PRE_FETCH_OPTIONS",
       "id": "status",
-      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request.fields), httpMethod: 'POST' }; }"
+      "functionSource": "exports.main = function(event, callback) { return callback(transformRequest(event)); }\nfunction transformRequest(request) { return { webhookUrl: request.webhookUrl + '?spaceId=' + request.fields.spaceInputs.fieldValue.value, body: JSON.stringify(request), httpMethod: 'POST' }; }"
     }
   ]
 }
