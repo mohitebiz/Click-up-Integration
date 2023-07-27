@@ -1,5 +1,6 @@
 const { axiosClickUp } = require("../../config/axios.config");
 const { logger } = require("../../config/logger.config");
+const moment = require("moment")
 const getworkSpaceData = async (portalId) => {
   try {
     console.log("portalId", portalId);
@@ -149,13 +150,21 @@ const getUserData = async (listId, portalId) => {
 
 const createTask = async (fetchedData, portalId) => {
   try {
-    console.log("portalId", portalId);
+    console.log("portalId>>>>>>>>>>>>", portalId);
+    const startWithinDate = moment();
+
+    fetchedData?.startWithin
+      ? startWithinDate.add(parseInt(fetchedData?.startWithin), "week")
+      : undefined;
+const completedIn = fetchedData?.completeIn
+? startWithinDate.clone().add(parseInt(fetchedData?.completeIn), "days")
+: undefined;
     payload = {
       name: fetchedData?.taskName,
       description: fetchedData?.taskDescription,
       assignees: fetchedData?.users,
-      due_date: fetchedData?.dueDate,
-      start_date: fetchedData?.startDate,
+      due_date: completedIn ? completedIn.valueOf():undefined,
+      start_date: startWithinDate ? startWithinDate.valueOf():undefined,
       status: fetchedData?.status,
       priority: fetchedData?.priority,
       time_estimate: fetchedData?.estimateTime * 3600000,
@@ -169,6 +178,7 @@ const createTask = async (fetchedData, portalId) => {
     );
     return resListData.data;
   } catch (error) {
+    console.log(error);
     logger.warn(JSON.stringify(error));
     return false;
   }
