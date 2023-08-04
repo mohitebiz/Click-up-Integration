@@ -9,7 +9,9 @@
         "fieldType": "select",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/workSpace"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -19,7 +21,9 @@
         "fieldType": "select",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/space"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -29,7 +33,9 @@
         "fieldType": "select",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/folder"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -39,7 +45,9 @@
         "fieldType": "select",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/list"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -48,7 +56,9 @@
         "type": "string",
         "fieldType": "text"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -57,7 +67,9 @@
         "type": "string",
         "fieldType": "textarea"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -67,7 +79,9 @@
         "fieldType": "checkbox",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/users"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -77,7 +91,9 @@
         "fieldType": "select",
         "optionsUrl": "https://cloud.crmtoolbox.io/clickup-integration/clickup/space/status"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -104,25 +120,59 @@
           }
         ]
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": false
     },
     {
       "typeDefinition": {
-        "name": "startDate",
-        "type": "date",
-        "fieldType": "date"
+        "name": "startWithin",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "value": 1,
+            "label": "1 week"
+          },
+          {
+            "value": 2,
+            "label": "2 weeks"
+          }
+        ]
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
       "typeDefinition": {
-        "name": "dueDate",
-        "type": "date",
-        "fieldType": "date"
+        "name": "completeIn",
+        "type": "enumeration",
+        "fieldType": "select",
+        "options": [
+          {
+            "value": 30,
+            "label": "30 days"
+          },
+          {
+            "value": 45,
+            "label": "45 days"
+          },
+          {
+            "value": 60,
+            "label": "60 days"
+          },
+          {
+            "value": 90,
+            "label": "90 days"
+          }
+        ]
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     },
     {
@@ -131,7 +181,9 @@
         "type": "number",
         "fieldType": "number"
       },
-      "supportedValueTypes": ["STATIC_VALUE"],
+      "supportedValueTypes": [
+        "STATIC_VALUE"
+      ],
       "isRequired": true
     }
   ],
@@ -139,47 +191,63 @@
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "workSpaceInput",
-      "dependentFieldNames": ["spaceInputs"]
+      "dependentFieldNames": [
+        "spaceInputs"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "spaceInputs",
-      "dependentFieldNames": ["folderInputs"]
+      "dependentFieldNames": [
+        "folderInputs"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "folderInputs",
-      "dependentFieldNames": ["listInputs"]
+      "dependentFieldNames": [
+        "listInputs"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "listInputs",
-      "dependentFieldNames": ["users"]
+      "dependentFieldNames": [
+        "users"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": ["startDate"]
+      "dependentFieldNames": [
+        "startWithin"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": ["dueDate"]
+      "dependentFieldNames": [
+        "completeIn"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "taskName",
-      "dependentFieldNames": ["estimateTime"]
+      "dependentFieldNames": [
+        "estimateTime"
+      ]
     },
     {
       "dependencyType": "SINGLE_FIELD",
       "controllingFieldName": "spaceInputs",
-      "dependentFieldNames": ["status"]
+      "dependentFieldNames": [
+        "status"
+      ]
     }
   ],
   "labels": {
     "en": {
-      "actionName": "Create Task - ClickUp",
+      "actionName": "Create ClickUp Task",
       "actionDescription": "This action will create a new task in click up!",
       "inputFieldLabels": {
         "workSpaceInput": "Select Work-Space",
@@ -187,9 +255,9 @@
         "folderInputs": "Select Folder",
         "taskName": "Enter Task Name",
         "taskDescription": "Enter Description For Task",
-        "startDate": "Enter Start Date",
-        "dueDate": "Enter Due Date",
-        "estimateTime": "Enter Estime Time For Task (In Hours)",
+        "startWithin": "Select Start within",
+        "completeIn": "Select Complete in",
+        "estimateTime": "Enter Estimate Time For Task (In Hours)",
         "listInputs": "Select List ",
         "users": "Select Assignees",
         "status": "Select Status",
@@ -201,8 +269,8 @@
         "folderInputs": "Please select the folder to create task",
         "taskName": "Please enter the name for task",
         "taskDescription": "Please enter description for task",
-        "startDate": "Please enter start date",
-        "dueDate": "Please enter due date",
+        "startWithin": "Please select start with in",
+        "completeIn": "Please select complete in",
         "estimateTime": "Please enter estimate time for task (in hours)",
         "listInputs": "Please select list",
         "users": "Please select users",
@@ -211,7 +279,11 @@
       }
     }
   },
-  "objectTypes": ["CONTACT", "COMPANY", "DEAL"],
+  "objectTypes": [
+    "CONTACT",
+    "COMPANY",
+    "DEAL"
+  ],
   "functions": [
     {
       "functionType": "PRE_FETCH_OPTIONS",
