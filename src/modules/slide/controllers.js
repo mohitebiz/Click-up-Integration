@@ -11,8 +11,27 @@ const { logger } = require("../../config/logger.config");
 
 const createSlide = async (req, response) => {
   const webhookData = req.body;
+  logger.verbose(
+    JSON.stringify({
+      objectType: webhookData.objectType,
+      objectId: webhookData.objectId,
+    })
+  );
+  if (webhookData.objectType !== "DEAL") {
+    return generalResponse({
+      response,
+      message: `Invalid object type.`,
+      toast: false,
+      statusCode: 400,
+      responseType: "error",
+      data: null,
+      dataKey: "data",
+    });
+  }
+
   try {
     const dealId = webhookData.objectId;
+    const dealName = webhookData.properties?.dealname?.value;
     const slidesAPI = google.slides({
       version: "v1",
       auth: oauth2Client,
@@ -21,9 +40,10 @@ const createSlide = async (req, response) => {
       version: "v3",
       auth: oauth2Client,
     });
-    const createFolderAndGetId = async (diplayName) => {
+    // function
+    const createFolderAndGetId = async (displayName) => {
       const fileMetadata = {
-        name: diplayName || dealId,
+        name: displayName || dealName || dealId,
         mimeType: "application/vnd.google-apps.folder",
         parents: [PARENT_FOLDER_ID],
       };
@@ -153,8 +173,9 @@ const createSlide = async (req, response) => {
         fileId: presentationId,
         fields: "*",
         supportsAllDrives: true,
-        driveId:DRIVE_ID,
+        driveId: DRIVE_ID,
       });
+      console.log("data", data);
       const responseData = {
         fileId: data.id,
         url: data?.webViewLink,
@@ -164,7 +185,7 @@ const createSlide = async (req, response) => {
       logger.verbose(
         `new presentation id is ${updatedSlide?.data?.presentationId}`
       );
-      console.log({responseData});
+      console.log({ responseData });
       return generalResponse({
         response,
         message: `new presentation id is ${data}`,
@@ -178,10 +199,27 @@ const createSlide = async (req, response) => {
       logger.verbose(
         "error in craete duplicate file because not got duplicate id"
       );
+      return generalResponse({
+        response,
+        message: `Something went wrong.`,
+        toast: false,
+        statusCode: 500,
+        responseType: "error",
+        data: null,
+        dataKey: "data",
+      });
     }
   } catch (error) {
     logger.warn(JSON.stringify(error.message));
-    return false;
+    return generalResponse({
+      response,
+      message: `Something went wrong.`,
+      toast: false,
+      statusCode: 500,
+      responseType: "error",
+      data: null,
+      dataKey: "data",
+    });
   }
 };
 module.exports = { createSlide };
