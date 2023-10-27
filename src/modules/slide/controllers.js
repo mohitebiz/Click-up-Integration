@@ -11,6 +11,7 @@ const { logger } = require("../../config/logger.config");
 
 const createSlide = async (req, response) => {
   const webhookData = req.body;
+
   logger.verbose(
     JSON.stringify({
       objectType: webhookData.objectType,
@@ -149,14 +150,14 @@ const createSlide = async (req, response) => {
       imageUrl
         ? requests.push({
             replaceImage: {
-              imageObjectId: "p3_i432",
+              imageObjectId: "p3_i167",
               imageReplaceMethod: "CENTER_INSIDE",
               url: imageUrl,
             },
           })
         : requests.push({
             replaceImage: {
-              imageObjectId: "p3_i432",
+              imageObjectId: "p3_i167",
               imageReplaceMethod: "CENTER_INSIDE",
               url: "https://www.crmtoolbox.io/hs-fs/hubfs/crm-toolbox/img/logo-crm-toolbox-avidly.png?width=1000&height=272&name=logo-crm-toolbox-avidly.png",
             },
