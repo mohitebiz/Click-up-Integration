@@ -113,7 +113,7 @@ const createSlide = async (req, response) => {
         webhookData?.properties?.customer_onboarding_specialist___description
           ?.value;
       const imageUrl =
-        webhookData?.properties?.customer_onboarding_specialist___imgurl?.value;
+        webhookData?.properties?.customer_onboarding_specialist___imgurl?.value?.trim();
 
       const payload = [
         {
@@ -214,7 +214,7 @@ const createSlide = async (req, response) => {
     logger.warn(JSON.stringify(error.message));
     return generalResponse({
       response,
-      message: `Something went wrong.`,
+      message: `Something went wrong. ${error.message}`,
       toast: false,
       statusCode: 500,
       responseType: "error",

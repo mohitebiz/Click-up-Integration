@@ -41,8 +41,6 @@ oauth2Client.on("tokens", async (tokens) => {
   const oldRecord = await fs.readFileSync("./token.json", "utf-8");
   const jsonData = JSON.parse(oldRecord);
 
-  logger.verbose(`main ${JSON.stringify(tokens)}`);
-
   const tokensdata = { ...tokens, refresh_token: jsonData.refresh_token };
 
   fs.writeFileSync("token.json", JSON.stringify(tokensdata));
