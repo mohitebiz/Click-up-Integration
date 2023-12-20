@@ -64,7 +64,7 @@ async function getNewAccessToken(refresh_token, access_token, data) {
         }
 
         fs.writeFileSync(
-          path.resolve(`./src/constant/token-${data.portal}.json`),
+          `src/constant/token-${data.portal}.json`,
           JSON.stringify(tokens)
         );
 
