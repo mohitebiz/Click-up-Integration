@@ -48,7 +48,7 @@ const handleAuthCallback = async (req, res) => {
     );
     logger.verbose(`handle callBack ${JSON.stringify(tokens)}`);
     fs.writeFileSync(
-      path.resolve(`./src/constant/token-${portal}.json`),
+      `src/constant/token-${portal}.json`,
       JSON.stringify(tokens)
     );
     // fs.writeFileSync(`token-${portal}.json`, JSON.stringify(tokens));
