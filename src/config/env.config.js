@@ -22,6 +22,7 @@ const envObject = {
   GMAIL_CLIENT_ID: process.env.GMAIL_CLIENT_ID,
   GMAIL_CLIENT_SECRET: process.env.GMAIL_CLIENT_SECRET,
   GMAIL_REDIRECT_URL: `${process.env.BASE_URL}${process.env.GMAIL_REDIRECT_ROUTE}`,
+  JWT_SECRET: process.env.JWT_SECRET,
 };
 
 module.exports = envObject;
