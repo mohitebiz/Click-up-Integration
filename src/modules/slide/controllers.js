@@ -6,7 +6,7 @@ const {
   PARENT_FOLDER_ID,
   DRIVE_ID,
 } = require("../../config/env.config");
-let tokenCreads = require("../../constant/token-2661178.json");
+let tokenCreads = require("../../constant/token-465916.json");
 let tokenCreadsAvidly = require("../../constant/token-308131.json");
 
 const { logger } = require("../../config/logger.config");
@@ -40,7 +40,7 @@ const createSlide = async (req, response) => {
 
   let oAuthFun;
   switch (portal) {
-    case 2661178:
+    case 465916:
       oAuthFun = await initOAuth2Client(portal, tokenCreads);
       break;
 
@@ -120,7 +120,7 @@ const createSlide = async (req, response) => {
 
     logger.info(`Portal for the slide create ${portal}`);
     switch (portal) {
-      case 2661178:
+      case 465916:
         if (duplicate.id) {
           const presentationId = duplicate?.id;
 
